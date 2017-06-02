@@ -1,0 +1,9 @@
+<% if @review.errors.any? %>
+ $('#new_review').html('<%= j render "reviews/form", restaurant: @restaurant, review: @review %>')
+<% else %>
+  var newReview = $('<%= j render "reviews/review", review: @review %>').hide();
+  $('#reviews').append(newReview);
+  newReview.slideDown('slow');
+  $('#review_content').val('');
+  $('#review_count').html('<%= j render "reviews/review_count", restaurant: @restaurant %>');
+<% end %>

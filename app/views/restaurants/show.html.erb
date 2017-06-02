@@ -1,7 +1,7 @@
 <h1><%= @restaurant.name %></h1>
 <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=15&size=400x300&sensor=false&maptype=roadmap&markers=color:red|#{@restaurant.address}" %>
-<h2>
-  <%= pluralize @restaurant.reviews.size, "review" %>
+<h2 id="review_count">
+  <%= render "reviews/review_count", restaurant: @restaurant %>
 </h2>
 
 <div id="reviews">
@@ -9,7 +9,10 @@
     Be the first to leave a review for <%= @restaurant.name %>
   <% else %>
     <% @restaurant.reviews.each do |review| %>
-      <p><%= review.content %></p>
+      <%= render "reviews/review", review: review %>
     <% end %>
   <% end %>
+</div>
+<div id="new_review">
+  <%= render "reviews/form", restaurant: @restaurant, review: @review %>
 </div>
